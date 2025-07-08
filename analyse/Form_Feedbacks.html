@@ -1,15 +1,85 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Formulaire de satisfaction</title>
   <style>
-    body { font-family: Arial; max-width: 600px; margin: auto; padding: 20px; }
-    label { display: block; margin-top: 15px; }
-    input, textarea, select { width: 100%; padding: 8px; margin-top: 5px; }
-    .radio-group { display: flex; justify-content: space-between; }
-    .radio-group input { width: auto; }
-    button { margin-top: 20px; padding: 10px 20px; }
+    /* mêmes styles que précédemment... */
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      color: #333;
+    }
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: 600;
+      color: #34495e;
+    }
+    input[type="text"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      margin-top: 6px;
+      border: 1.8px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+      resize: vertical;
+    }
+    input[type="text"]:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #3498db;
+      outline: none;
+    }
+    input[readonly] {
+      background-color: #e9ecef;
+      color: #555;
+      cursor: not-allowed;
+    }
+    .radio-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      max-width: 350px;
+    }
+    .radio-group label {
+      font-weight: normal;
+      color: #2c3e50;
+      cursor: pointer;
+    }
+    .radio-group input[type="radio"] {
+      margin-right: 6px;
+      cursor: pointer;
+    }
+    button {
+      margin-top: 30px;
+      padding: 12px 25px;
+      background-color: #3498db;
+      color: white;
+      font-weight: 600;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
   </style>
 </head>
 <body>
@@ -17,15 +87,12 @@
   <h2>Formulaire de satisfaction</h2>
 
   <form id="feedbackForm" method="POST" action="/submit">
-    <!-- Nom -->
     <label for="nom">Nom :</label>
-    <input type="text" name="nom" id="nom" required>
+    <input type="text" name="nom" id="nom" required />
 
-    <!-- Prénom -->
     <label for="prenom">Prénom :</label>
-    <input type="text" name="prenom" id="prenom" required>
+    <input type="text" name="prenom" id="prenom" required />
 
-    <!-- Module -->
     <label for="module">Module :</label>
     <select name="module" id="module" required>
       <option value="">-- Sélectionner un module --</option>
@@ -35,30 +102,27 @@
       <option value="Anglais">Anglais</option>
     </select>
 
-    <!-- Score -->
     <label>Score :</label>
     <div class="radio-group">
-      <label><input type="radio" name="score" value="1" required> 1</label>
-      <label><input type="radio" name="score" value="2"> 2</label>
-      <label><input type="radio" name="score" value="3"> 3</label>
-      <label><input type="radio" name="score" value="4"> 4</label>
-      <label><input type="radio" name="score" value="5"> 5</label>
+      <label><input type="radio" name="score" value="1" required /> 1</label>
+      <label><input type="radio" name="score" value="2" /> 2</label>
+      <label><input type="radio" name="score" value="3" /> 3</label>
+      <label><input type="radio" name="score" value="4" /> 4</label>
+      <label><input type="radio" name="score" value="5" /> 5</label>
     </div>
 
-    <!-- Feedback -->
     <label for="feedback">Feedback :</label>
     <textarea name="feedback" id="feedback" rows="4" required></textarea>
 
-    <!-- Source (plateforme) détectée automatiquement -->
-    <input type="hidden" name="source" id="source">
+    <!-- Source visible uniquement -->
+    <label for="sourceVisible">Source du formulaire :</label>
+    <input type="text" id="sourceVisible" name="source" readonly />
 
-    <!-- Bouton de soumission -->
     <button type="submit">Envoyer</button>
   </form>
 
   <script>
-    // Détection automatique de la plateforme (domaine)
-    document.getElementById('source').value = window.location.hostname;
+    document.getElementById('sourceVisible').value = window.location.hostname;
   </script>
 
 </body>
